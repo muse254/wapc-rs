@@ -97,8 +97,8 @@ mod wapchost;
 mod wasi;
 
 pub use wapchost::modulestate::ModuleState;
-pub use wapchost::traits::{ModuleHost, WebAssemblyEngineProvider};
-pub use wapchost::WapcHost;
+pub use wapchost::traits::{ModuleHost, WebAssemblyEngineProvider, WebAssemblyEngineProviderAsync};
+pub use wapchost::{WapcHost, WapcHostAsync};
 pub use wasi::WasiParams;
 
 /// The signature of a Host Callback function.
