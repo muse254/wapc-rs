@@ -46,3 +46,10 @@ pub trait WebAssemblyEngineProvider {
   /// error if it does not support bytes replacement.
   fn replace(&mut self, bytes: &[u8]) -> Result<(), Box<dyn Error + Send + Sync>>;
 }
+
+/// An asynchronous version of the `WebAssemblyEngineProvider` trait for use in async contexts.
+/// The engine provider is synchronous, but the host is async, so this trait is used to bridge
+/// the gap between the two.
+///
+/// Async synchronization is left to the caller to implement.
+pub trait WebAssemblyEngineProviderAsync: WebAssemblyEngineProvider + Send + Sync {}

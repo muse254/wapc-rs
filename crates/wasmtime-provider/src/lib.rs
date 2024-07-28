@@ -90,7 +90,7 @@ use errors::{Error, Result};
 mod builder;
 pub use builder::WasmtimeEngineProviderBuilder;
 use parking_lot::RwLock;
-use wapc::{wapc_functions, ModuleState, WasiParams, WebAssemblyEngineProvider};
+use wapc::{wapc_functions, ModuleState, WasiParams, WebAssemblyEngineProvider, WebAssemblyEngineProviderAsync};
 // export wasmtime and wasmtime_wasi, so that consumers of this crate can use
 // the very same version
 pub use wasmtime;
@@ -258,6 +258,7 @@ impl Clone for WasmtimeEngineProvider {
           store,
           wasi_params: self.wasi_params.clone(),
         };
+
         new.init(state.host.clone()).unwrap();
         new
       }
@@ -401,6 +402,8 @@ impl WebAssemblyEngineProvider for WasmtimeEngineProvider {
     Ok(self.initialize()?)
   }
 }
+
+impl WebAssemblyEngineProviderAsync for WasmtimeEngineProvider {}
 
 impl WasmtimeEngineProvider {
   fn initialize(&mut self) -> Result<()> {
