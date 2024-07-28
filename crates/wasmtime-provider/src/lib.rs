@@ -259,7 +259,7 @@ impl Clone for WasmtimeEngineProvider {
           wasi_params: self.wasi_params.clone(),
         };
 
-        WebAssemblyEngineProvider::init(&mut new, state.host.clone()).unwrap();
+        new.init(state.host.clone()).unwrap();
         new
       }
       None => Self {
